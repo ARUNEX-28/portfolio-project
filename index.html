@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arunachala Eshwarar | Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background: #0b1120;
+    color: white;
+}
+
+/* Navigation */
+nav {
+    background: #111c32;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav h2 {
+    color: #38bdf8;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+nav a.active-link {
+    color: #38bdf8;
+}
+
+/* Pages */
+.page {
+    display: none;
+    min-height: 85vh;
+    padding: 65px 8%;
+}
+
+.page.active {
+    display: block;
+}
+
+h1 {
+    color: #38bdf8;
+    font-size: 35px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+p {
+    color: #cbd5e1;
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+.highlight {
+    color: #38bdf8;
+}
+
+/* Home */
+#home {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0b1120, #172d4d);
+}
+
+#home.active {
+    display: flex;
+}
+
+.home-content h1 {
+    font-size: 45px;
+}
+
+.home-content h2 {
+    font-size: 26px;
+    color: #cbd5e1;
+}
+
+.home-content p {
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.btn {
+    display: inline-block;
+    background: #0284c7;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #0369a1;
+}
+
+/* Cards */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.card {
+    background: #17243a;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #263b59;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #38bdf8;
+}
+
+.card h2, .card h3 {
+    color: #38bdf8;
+    margin-bottom: 12px;
+}
+
+.card p {
+    font-size: 15px;
+}
+
+/* Skills */
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.skill-item {
+    background: #17243a;
+    border: 1px solid #38bdf8;
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: #e2e8f0;
+}
+
+/* Contact */
+.contact-box {
+    max-width: 600px;
+    background: #17243a;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.contact-box p {
+    margin: 15px 0;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 13px;
+    margin: 10px 0;
+    border: 1px solid #334155;
+    background: #0b1120;
+    color: white;
+    border-radius: 6px;
+}
+
+footer {
+    background: #111c32;
+    padding: 20px;
+    text-align: center;
+    color: #94a3b8;
+}
+
+@media(max-width: 650px) {
+    nav {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav div {
+        line-height: 2.5;
+    }
+
+    .home-content h1 {
+        font-size: 32px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .page {
+        padding: 45px 6%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav>
+    <h2>ARUN ESHWAR</h2>
+
+    <div>
+        <a class="active-link" onclick="showPage('home',this)">Home</a>
+        <a onclick="showPage('about',this)">About</a>
+        <a onclick="showPage('skills',this)">Skills</a>
+        <a onclick="showPage('projects',this)">Projects</a>
+        <a onclick="showPage('contact',this)">Contact</a>
+    </div>
+</nav>
+
+<!-- HOME PAGE -->
+<section id="home" class="page active">
+
+    <div class="home-content">
+        <h2>Hello, Welcome to My Portfolio!</h2>
+
+        <h1>I'm <span class="highlight">
+        ARUNACHALA ESHWARAR S</span></h1>
+
+        <h2>B.Tech - Computer Science and Engineering</h2>
+        <h2 class="highlight">(Artificial Intelligence & Machine Learning)</h2>
+
+        <p>
+            I am an enthusiastic first-year B.Tech student at
+            Hindustan Institute of Technology and Science, Chennai.
+            I am interested in programming, emerging technologies
+            and problem solving.
+        </p>
+
+        <p>
+            I am passionate about learning new technologies
+            and developing innovative solutions.
+        </p>
+
+        <button class="btn" onclick="showPage('about')">
+            Explore My Profile
+        </button>
+    </div>
+
+</section>
+
+<!-- ABOUT PAGE -->
+<section id="about" class="page">
+
+    <h1>About Me</h1>
+
+    <p>
+        I am ARUNACHALA ESHWARAR S, a first-year B.Tech student
+        specializing in Computer Science and Engineering
+        (Artificial Intelligence and Machine Learning) at
+        Hindustan Institute of Technology and Science, Chennai.
+    </p>
+
+    <br>
+
+    <h2 class="highlight">Career Objective</h2>
+
+    <p>
+        Enthusiastic first-year B.Tech student specializing in
+        Computer Science and Engineering (AI & ML). Interested in
+        programming, emerging technologies, and problem solving.
+        Eager to develop technical knowledge and gain practical
+        experience through innovative projects.
+    </p>
+
+    <br>
+
+    <h2 class="highlight">Education</h2>
+
+    <div class="container">
+
+        <div class="card">
+            <h3>Bachelor of Technology</h3>
+            <p>Computer Science and Engineering (AI & ML)</p>
+            <p>Hindustan Institute of Technology and Science</p>
+            <p>Chennai</p>
+            <p>2026 - Present</p>
+            <p>First Year</p>
+        </div>
+
+        <div class="card">
+            <h3>Higher Secondary (12th)</h3>
+            <p>Marks: 527 / 600</p>
+            <p>Percentage: 87.83%</p>
+        </div>
+
+        <div class="card">
+            <h3>Secondary School (10th)</h3>
+            <p>Marks: 458 / 500</p>
+            <p>Percentage: 91.60%</p>
+        </div>
+
+    </div>
+
+    <br>
+
+    <h2 class="highlight">Areas of Interest</h2>
+
+    <div class="skill-list">
+        <span class="skill-item">Artificial Intelligence</span>
+        <span class="skill-item">Machine Learning</span>
+        <span class="skill-item">Data Science</span>
+        <span class="skill-item">Software Development</span>
+        <span class="skill-item">Web Development</span>
+    </div>
+
+    <h2 class="highlight">Personal Details</h2>
+
+    <p><b>Name:</b> ARUNACHALA ESHWARAR S</p>
+    <p><b>Current Year:</b> First Year</p>
+    <p><b>Languages:</b> Tamil, English</p>
+
+</section>
+
+<!-- SKILLS PAGE -->
+<section id="skills" class="page">
+
+    <h1>My Skills</h1>
+
+    <h2 class="highlight">Technical Skills</h2>
+
+    <div class="skill-list">
+        <span class="skill-item">Python Programming</span>
+        <span class="skill-item">C Programming</span>
+        <span class="skill-item">Basic Computer Knowledge</span>
+        <span class="skill-item">Problem Solving</span>
+    </div>
+
+    <br>
+
+    <h2 class="highlight">Soft Skills</h2>
+
+    <div class="container">
+
+        <div class="card">
+            <h3>Communication</h3>
+            <p>Ability to share ideas and communicate effectively.</p>
+        </div>
+
+        <div class="card">
+            <h3>Adaptability</h3>
+            <p>Willingness to learn and adapt to new situations.</p>
+        </div>
+
+        <div class="card">
+            <h3>Leadership</h3>
+            <p>Interest in teamwork and taking responsibility.</p>
+        </div>
+
+        <div class="card">
+            <h3>Problem Solving</h3>
+            <p>Interest in analyzing problems and finding solutions.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PROJECTS PAGE -->
+<section id="projects" class="page">
+
+    <h1>My Projects</h1>
+
+    <p>
+        I am interested in developing innovative projects
+        related to technology, artificial intelligence
+        and software development.
+    </p>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>01. Attendance Monitoring System</h2>
+            <p>
+                A project focused on attendance monitoring
+                and managing attendance records.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>02. Smart Spend AI</h2>
+            <p>
+                An AI-related project focused on smart
+                spending and financial management.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>03. Context-Aware Multi-User Voice Authentication</h2>
+            <p>
+                A project focused on voice authentication
+                for multiple users with context awareness.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CERTIFICATIONS SECTION -->
+<section id="certifications" class="page">
+
+    <h1>Certifications & Workshops</h1>
+
+    <div class="container">
+
+        <div class="card">
+            <h3>Beyond the Syntax</h3>
+            <p>AIML Workshop</p>
+            <p>February 2026</p>
+        </div>
+
+        <div class="card">
+            <h3>Synapse '26</h3>
+            <p>AI Webinar</p>
+            <p>May 2026</p>
+        </div>
+
+        <div class="card">
+            <h3>Zentrix</h3>
+            <p>National Level Hackathon</p>
+            <p>July 2026</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT PAGE -->
+<section id="contact" class="page">
+
+    <h1>Contact Me</h1>
+
+    <p>
+        Feel free to contact me for collaboration,
+        learning opportunities and project discussions.
+    </p>
+
+    <br>
+
+    <div class="contact-box">
+
+        <h2 class="highlight">My Contact Details</h2>
+
+        <p><b>Name:</b> ARUNACHALA ESHWARAR S</p>
+
+        <p><b>Email:</b>
+        <a href="mailto:arunex28@gmail.com" class="highlight">
+        arunex28@gmail.com</a></p>
+
+        <p><b>Phone:</b>
+        <a href="tel:+919344194994" class="highlight">
+        +91 9344194994</a></p>
+
+        <p><b>College:</b> Hindustan Institute of Technology
+        and Science, Chennai</p>
+
+        <p><b>Languages:</b> Tamil, English</p>
+
+        <br>
+
+        <h2 class="highlight">Send a Message</h2>
+
+        <form onsubmit="sendMessage(event)">
+
+            <input type="text" placeholder="Your Name" required>
+
+            <input type="email" placeholder="Your Email" required>
+
+            <textarea rows="5" placeholder="Your Message"
+            required></textarea>
+
+            <button class="btn" type="submit">
+                Send Message
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        © 2026 ARUNACHALA ESHWARAR S |
+        Personal Portfolio Website
+    </p>
+    <p>Designed using HTML, CSS and JavaScript</p>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+
+function showPage(pageId, element) {
+
+    let pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    document.getElementById(pageId).classList.add("active");
+
+    let links = document.querySelectorAll("nav a");
+
+    links.forEach(function(link) {
+        link.classList.remove("active-link");
+    });
+
+    if(element) {
+        element.classList.add("active-link");
+    }
+
+    window.scrollTo(0, 0);
+}
+
+function sendMessage(event) {
+
+    event.preventDefault();
+
+    alert("Thank you for contacting me!");
+
+    event.target.reset();
+}
+
+</script>
+
+</body>
+</html>

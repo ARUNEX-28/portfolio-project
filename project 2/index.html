@@ -1,0 +1,935 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stationery Hub - Online Store</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f8f7ff;
+    color: #292044;
+}
+
+header {
+    background: #292044;
+    color: white;
+    padding: 17px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #ffad9e;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #ffad9e;
+    transform: translateY(-3px);
+}
+
+.cart-link {
+    background: #6953d7;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.page {
+    display: none;
+    min-height: 80vh;
+    animation: appear .5s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero {
+    background: linear-gradient(120deg,#e9e5ff,#ffe9e5);
+    padding: 75px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #292044;
+}
+
+.hero h1 span {
+    color: #6953d7;
+}
+
+.hero p {
+    color: #666;
+    margin-top: 20px;
+    line-height: 1.8;
+}
+
+.hero img {
+    width: 100%;
+    max-height: 370px;
+    object-fit: cover;
+    border-radius: 25px;
+    animation: float 4s infinite ease-in-out;
+}
+
+@keyframes float {
+    50% { transform: translateY(-13px); }
+}
+
+.btn {
+    display: inline-block;
+    background: #6953d7;
+    color: white;
+    padding: 13px 25px;
+    border-radius: 9px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+    margin-top: 20px;
+}
+
+.btn:hover {
+    background: #4532ad;
+    transform: scale(1.05);
+}
+
+.section {
+    padding: 55px 7%;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    color: #292044;
+    margin-bottom: 35px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 22px;
+}
+
+.category {
+    background: white;
+    text-align: center;
+    padding: 30px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .3s;
+    border: 1px solid #eee;
+}
+
+.category:hover {
+    background: #eeeaff;
+    transform: translateY(-8px);
+}
+
+.category i {
+    font-size: 38px;
+    color: #6953d7;
+    margin-bottom: 15px;
+}
+
+.product {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px #ddd;
+    transition: .3s;
+}
+
+.product:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px #ccc;
+}
+
+.product img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #eeeaff;
+}
+
+.product-info {
+    padding: 17px;
+}
+
+.product-info h3 {
+    font-size: 16px;
+    font-weight: 700;
+    min-height: 48px;
+}
+
+.price {
+    color: #6953d7;
+    font-size: 19px;
+    font-weight: 800;
+    margin-top: 8px;
+}
+
+.old {
+    text-decoration: line-through;
+    color: #aaa;
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.add {
+    width: 100%;
+    background: #6953d7;
+    color: white;
+    border: none;
+    padding: 11px;
+    border-radius: 8px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add:hover {
+    background: #4532ad;
+}
+
+.search {
+    display: block;
+    width: 100%;
+    max-width: 450px;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 0 auto 30px;
+    outline: none;
+}
+
+.review {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px #ddd;
+}
+
+.review p {
+    color: #666;
+    line-height: 1.7;
+}
+
+.promo {
+    background: linear-gradient(110deg,#6953d7,#a08af7);
+    color: white;
+    padding: 45px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.contact-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 4px 15px #ddd;
+}
+
+.contact-box input,
+.contact-box textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+footer {
+    background: #292044;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+footer a {
+    color: #ffad9e;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.qty button {
+    padding: 4px 10px;
+    background: #eeeaff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media(max-width:900px) {
+    header {
+        flex-direction: column;
+    }
+    nav {
+        justify-content: center;
+        gap: 15px;
+    }
+    .grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+    .hero h1 {
+        font-size: 36px;
+    }
+}
+
+@media(max-width:600px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 45px 7%;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 32px;
+    }
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    nav {
+        gap: 12px;
+    }
+    nav a {
+        font-size: 12px;
+    }
+    .section {
+        padding: 40px 5%;
+    }
+    .title {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header>
+    <a class="logo" href="#home">✏ Stationery<span>Hub.</span></a>
+
+    <nav>
+        <a href="#home" target="_blank">Home</a>
+        <a href="#categories" target="_blank">Categories</a>
+        <a href="#products" target="_blank">Products</a>
+        <a href="#about" target="_blank">About</a>
+        <a href="#contact" target="_blank">Contact</a>
+        <a href="#cart" target="_blank" class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            Cart (<span id="count">0</span>)
+        </a>
+    </nav>
+</header>
+
+<!-- HOME PAGE -->
+<section id="home" class="page active">
+
+    <div class="hero">
+        <div>
+            <h1>Make Every Day <span>Creative!</span></h1>
+
+            <p>
+                Discover premium notebooks, colorful pens,
+                art supplies and everything you need to make
+                your ideas come alive.
+            </p>
+
+            <a href="#products" target="_blank" class="btn">
+                Shop Now <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <img src="https://images.unsplash.com/photo-1455390582262-044cbaa4b6d9?w=900"
+             alt="Stationery collection">
+    </div>
+
+    <div class="section">
+        <h2 class="title">Why Choose Stationery Hub?</h2>
+
+        <div class="grid">
+            <div class="category">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>Fast Delivery</h3>
+                <p>Quick delivery at your doorstep.</p>
+            </div>
+
+            <div class="category">
+                <i class="fa-solid fa-award"></i>
+                <h3>Best Quality</h3>
+                <p>Premium stationery products.</p>
+            </div>
+
+            <div class="category">
+                <i class="fa-solid fa-tags"></i>
+                <h3>Best Offers</h3>
+                <p>Exciting deals and discounts.</p>
+            </div>
+
+            <div class="category">
+                <i class="fa-solid fa-headset"></i>
+                <h3>Support</h3>
+                <p>Customer assistance whenever needed.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="promo">
+            <h2 class="text-3xl font-bold">Your Creativity Starts Here!</h2>
+            <p class="mt-3">Explore our collection of amazing stationery.</p>
+            <a href="#products" target="_blank" class="btn bg-white text-purple-700">
+                Explore Products
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CATEGORIES PAGE -->
+<section id="categories" class="page section">
+    <h1 class="title">Explore Our Categories</h1>
+
+    <div class="grid">
+        <div class="category" onclick="openProducts('Notebook')">
+            <i class="fa-solid fa-book"></i>
+            <h3>Notebooks</h3>
+        </div>
+
+        <div class="category" onclick="openProducts('Pen')">
+            <i class="fa-solid fa-pen"></i>
+            <h3>Pens</h3>
+        </div>
+
+        <div class="category" onclick="openProducts('Art')">
+            <i class="fa-solid fa-palette"></i>
+            <h3>Art Supplies</h3>
+        </div>
+
+        <div class="category" onclick="openProducts('Office')">
+            <i class="fa-solid fa-paperclip"></i>
+            <h3>Office Items</h3>
+        </div>
+
+        <div class="category" onclick="openProducts('Bag')">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <h3>School Bags</h3>
+        </div>
+
+        <div class="category" onclick="openProducts('All')">
+            <i class="fa-solid fa-store"></i>
+            <h3>All Products</h3>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCTS PAGE -->
+<section id="products" class="page section">
+    <h1 class="title">Our Stationery Collection</h1>
+
+    <input type="text" class="search" id="search"
+        placeholder="Search for notebooks, pens, art supplies..."
+        oninput="renderProducts()">
+
+    <div class="flex justify-center flex-wrap gap-3 mb-8">
+        <button class="btn" onclick="setCategory('All')">All</button>
+        <button class="btn" onclick="setCategory('Notebook')">Notebooks</button>
+        <button class="btn" onclick="setCategory('Pen')">Pens</button>
+        <button class="btn" onclick="setCategory('Art')">Art</button>
+        <button class="btn" onclick="setCategory('Office')">Office</button>
+        <button class="btn" onclick="setCategory('Bag')">Bags</button>
+    </div>
+
+    <div id="productGrid" class="grid"></div>
+    <p id="empty" class="text-center mt-8 hidden">No products found!</p>
+</section>
+
+<!-- ABOUT PAGE -->
+<section id="about" class="page section">
+    <h1 class="title">About Stationery Hub</h1>
+
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow">
+        <h2 class="text-2xl font-bold text-purple-700 mb-4">
+            Welcome to Our Creative World!
+        </h2>
+
+        <p class="text-gray-600 leading-8">
+            Stationery Hub is an online stationery shopping platform
+            designed to provide quality products for students,
+            teachers, artists and office professionals.
+            We offer notebooks, pens, art materials, school bags
+            and many other stationery essentials at affordable prices.
+        </p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">
+            Our Mission
+        </h2>
+
+        <p class="text-gray-600 leading-8">
+            Our mission is to make stationery shopping simple,
+            enjoyable and affordable for everyone.
+        </p>
+    </div>
+
+    <div class="grid mt-10">
+        <div class="category">
+            <i class="fa-solid fa-heart"></i>
+            <h3>Customer Satisfaction</h3>
+        </div>
+        <div class="category">
+            <i class="fa-solid fa-star"></i>
+            <h3>Premium Products</h3>
+        </div>
+        <div class="category">
+            <i class="fa-solid fa-truck"></i>
+            <h3>Quick Delivery</h3>
+        </div>
+        <div class="category">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Trusted Service</h3>
+        </div>
+    </div>
+
+    <h2 class="title mt-16">Customer Reviews</h2>
+
+    <div class="grid">
+        <div class="review">
+            <div class="text-yellow-500">★★★★★</div>
+            <p>"Great stationery collection and excellent quality!"</p>
+            <h3 class="font-bold mt-4">Priya Sharma</h3>
+        </div>
+
+        <div class="review">
+            <div class="text-yellow-500">★★★★★</div>
+            <p>"I love the colorful pens and notebooks. Amazing store!"</p>
+            <h3 class="font-bold mt-4">Rahul Kumar</h3>
+        </div>
+
+        <div class="review">
+            <div class="text-yellow-500">★★★★★</div>
+            <p>"Very useful products for students and office work."</p>
+            <h3 class="font-bold mt-4">Ananya Reddy</h3>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT PAGE -->
+<section id="contact" class="page section">
+    <h1 class="title">Contact Us</h1>
+
+    <div class="contact-box">
+        <h2 class="text-2xl font-bold text-purple-700">
+            Get In Touch
+        </h2>
+
+        <p class="text-gray-500 mt-3">
+            Have a question? Send us a message!
+        </p>
+
+        <form onsubmit="sendMessage(event)">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="text" placeholder="Subject" required>
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+
+            <button class="btn w-full">Send Message</button>
+        </form>
+
+        <div class="mt-8 leading-8">
+            <p><i class="fa-solid fa-envelope text-purple-600"></i> support@stationeryhub.com</p>
+            <p><i class="fa-solid fa-phone text-purple-600"></i> +91 98765 43210</p>
+            <p><i class="fa-solid fa-location-dot text-purple-600"></i> Chennai, India</p>
+        </div>
+    </div>
+</section>
+
+<!-- CART PAGE -->
+<section id="cart" class="page section">
+    <h1 class="title">My Shopping Cart</h1>
+
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow">
+
+        <div id="cartItems"></div>
+
+        <div class="border-t mt-5 pt-5">
+            <h2 class="text-2xl font-bold">
+                Total: ₹<span id="total">0</span>
+            </h2>
+
+            <button class="btn w-full" onclick="checkout()">
+                Proceed to Checkout
+            </button>
+
+            <p class="text-xs text-gray-400 text-center mt-3">
+                Demo checkout only. No real payment is processed.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <h2 class="text-2xl font-bold">
+        Stationery<span class="text-orange-300">Hub.</span>
+    </h2>
+
+    <p class="mt-3">Your One-Stop Stationery Shopping Destination</p>
+
+    <div class="mt-5">
+        <a href="https://instagram.com/">Instagram</a>
+        <a href="https://facebook.com/">Facebook</a>
+        <a href="https://youtube.com/">YouTube</a>
+    </div>
+
+    <p class="mt-6 text-sm text-gray-400">
+        © 2026 Stationery Hub. All Rights Reserved.
+    </p>
+</footer>
+
+<script>
+
+// PRODUCTS
+
+const products = [
+    {id:1,name:"Premium Spiral Notebook",category:"Notebook",price:149,old:199,image:"https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=500"},
+    {id:2,name:"Luxury Ball Point Pen Set",category:"Pen",price:99,old:149,image:"https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500"},
+    {id:3,name:"Colorful Marker Set",category:"Art",price:249,old:299,image:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500"},
+    {id:4,name:"Sticky Notes Collection",category:"Office",price:79,old:99,image:"https://images.unsplash.com/photo-1455390582262-044cbaa4b6d9?w=500"},
+    {id:5,name:"Drawing Pencil Kit",category:"Art",price:199,old:249,image:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500"},
+    {id:6,name:"Daily Planner",category:"Notebook",price:299,old:399,image:"https://images.unsplash.com/photo-1544816155-12df9643f363?w=500"},
+    {id:7,name:"Office Stapler Set",category:"Office",price:129,old:179,image:"https://images.unsplash.com/photo-1517842645767-c639042777db?w=500"},
+    {id:8,name:"School Backpack",category:"Bag",price:699,old:899,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"},
+    {id:9,name:"Watercolor Paint Set",category:"Art",price:349,old:449,image:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500"},
+    {id:10,name:"Gel Pen Combo Pack",category:"Pen",price:159,old:199,image:"https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500"},
+    {id:11,name:"Hardcover Journal",category:"Notebook",price:229,old:299,image:"https://images.unsplash.com/photo-1517842645767-c639042777db?w=500"},
+    {id:12,name:"Office Organizer Kit",category:"Office",price:399,old:499,image:"https://images.unsplash.com/photo-1455390582262-044cbaa4b6d9?w=500"}
+];
+
+// SHARED CART USING LOCAL STORAGE
+
+let cart = JSON.parse(localStorage.getItem("stationeryCart") || "[]");
+let selectedCategory = "All";
+
+function saveCart() {
+    localStorage.setItem("stationeryCart",JSON.stringify(cart));
+    updateCount();
+}
+
+// PAGE NAVIGATION
+// A URL hash is used so each section can be opened in a new tab.
+
+function showPage() {
+
+    let page = location.hash.replace("#","") || "home";
+
+    document.querySelectorAll(".page").forEach(p => {
+        p.classList.remove("active");
+    });
+
+    let selected = document.getElementById(page);
+
+    if (!selected) {
+        selected = document.getElementById("home");
+    }
+
+    selected.classList.add("active");
+
+    if (page === "products") renderProducts();
+    if (page === "cart") renderCart();
+
+    updateCount();
+    window.scrollTo(0,0);
+}
+
+window.addEventListener("hashchange",showPage);
+showPage();
+
+// OPEN PRODUCTS WITH CATEGORY
+
+function openProducts(category) {
+
+    const url = new URL(location.href);
+    url.hash = "products";
+
+    const tab = window.open(url.href,"_blank");
+
+    if (tab) {
+        tab.addEventListener("load",function() {
+            tab.selectedCategory = category;
+        });
+    }
+
+    // Also support the current page when popups are blocked.
+    if (!tab) {
+        selectedCategory = category;
+        location.hash = "products";
+    }
+}
+
+// CATEGORY FILTER
+
+function setCategory(category) {
+    selectedCategory = category;
+    renderProducts();
+}
+
+// DISPLAY PRODUCTS
+
+function renderProducts() {
+
+    const grid = document.getElementById("productGrid");
+    if (!grid) return;
+
+    let search = document.getElementById("search").value.toLowerCase();
+
+    let filtered = products.filter(p => {
+        return (selectedCategory === "All" || p.category === selectedCategory)
+        && p.name.toLowerCase().includes(search);
+    });
+
+    grid.innerHTML = "";
+
+    document.getElementById("empty").classList.toggle("hidden",filtered.length > 0);
+
+    filtered.forEach(p => {
+
+        let card = document.createElement("div");
+        card.className = "product";
+
+        card.innerHTML = `
+            <img src="${p.image}" alt="${p.name}"
+            onerror="this.src='https://placehold.co/500x300/ece9ff/5b4bce?text=Stationery'">
+
+            <div class="product-info">
+                <p class="text-purple-600 text-xs font-bold">${p.category}</p>
+                <h3>${p.name}</h3>
+                <div class="text-yellow-500 mt-2">★★★★★</div>
+
+                <div class="price">
+                    ₹${p.price}
+                    <span class="old">₹${p.old}</span>
+                </div>
+
+                <button class="add" onclick="addToCart(${p.id})">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                </button>
+            </div>
+        `;
+
+        grid.appendChild(card);
+    });
+}
+
+// ADD TO CART
+
+function addToCart(id) {
+
+    let item = cart.find(p => p.id === id);
+
+    if (item) {
+        item.quantity++;
+    } else {
+        cart.push({
+            id:id,
+            quantity:1
+        });
+    }
+
+    saveCart();
+
+    alert("Product added to your shopping cart!");
+}
+
+// UPDATE CART COUNT
+
+function updateCount() {
+
+    let count = cart.reduce((sum,p) => sum + p.quantity,0);
+
+    document.getElementById("count").textContent = count;
+}
+
+// CART DISPLAY
+
+function renderCart() {
+
+    let container = document.getElementById("cartItems");
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    let total = 0;
+
+    if (cart.length === 0) {
+        container.innerHTML = `
+            <p class="text-center text-gray-400 py-10">
+                Your shopping cart is empty!
+            </p>
+        `;
+    }
+
+    cart.forEach(item => {
+
+        let product = products.find(p => p.id === item.id);
+
+        if (!product) return;
+
+        total += product.price * item.quantity;
+
+        container.innerHTML += `
+            <div class="cart-item">
+
+                <img src="${product.image}" alt="${product.name}">
+
+                <div class="flex-1">
+                    <h3 class="font-bold">${product.name}</h3>
+                    <p class="text-purple-700 font-bold">₹${product.price}</p>
+
+                    <div class="qty flex gap-3 items-center mt-2">
+                        <button onclick="changeQty(${product.id},-1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="changeQty(${product.id},1)">+</button>
+                        <button onclick="removeItem(${product.id})"
+                            class="text-red-500 ml-2">Remove</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    document.getElementById("total").textContent = total;
+}
+
+// CHANGE QUANTITY
+
+function changeQty(id,amount) {
+
+    let item = cart.find(p => p.id === id);
+
+    if (!item) return;
+
+    item.quantity += amount;
+
+    if (item.quantity <= 0) {
+        cart = cart.filter(p => p.id !== id);
+    }
+
+    saveCart();
+    renderCart();
+}
+
+// REMOVE ITEM
+
+function removeItem(id) {
+    cart = cart.filter(p => p.id !== id);
+    saveCart();
+    renderCart();
+}
+
+// CHECKOUT
+
+function checkout() {
+
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    alert("Thank you for shopping at Stationery Hub! This is a demo checkout. No payment has been processed.");
+
+    cart = [];
+    saveCart();
+    renderCart();
+}
+
+// CONTACT FORM
+
+function sendMessage(event) {
+
+    event.preventDefault();
+
+    alert("Thank you! Your message has been submitted in this demo.");
+
+    event.target.reset();
+}
+
+// INITIALIZE
+
+saveCart();
+renderProducts();
+
+</script>
+
+</body>
+</html>
+
